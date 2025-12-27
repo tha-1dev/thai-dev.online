@@ -1,169 +1,680 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>THAI-DEV — System Reboot</title>
-
-  <meta name="description" content="Thai-Dev Platform — System Reboot in Progress" />
+  <title>THAI-DEV.ONLINE — Launch 2026</title>
+  <meta name="description" content="Thai-Dev Platform 2026 — Knowledge, Tools, Community for real-world engineers & developers. Work Hard · Work Smart · Work Real." />
   <meta name="theme-color" content="#0b0f14" />
-
+  <meta property="og:title" content="THAI-DEV.ONLINE — Launch 2026" />
+  <meta property="og:description" content="A platform built from real work — Knowledge · Tools · Community." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thai-dev.online/" />
+  <!-- Optional: add og:image later -->
   <style>
     :root{
       --bg:#0b0f14;
       --panel:#0f1623;
+      --panel2:#0b1320;
+      --line:#1f2937;
       --text:#e6edf3;
       --muted:#9aa4b2;
       --accent:#2dd4bf;
+      --accent2:#60a5fa;
       --warn:#fbbf24;
-      --line:#1f2937;
+      --bad:#fb7185;
+      --ok:#34d399;
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --radius: 18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Thai", "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
-        radial-gradient(1200px 600px at 20% -10%, #12203a 0%, transparent 40%),
-        radial-gradient(900px 500px at 90% 10%, #0b3b3b 0%, transparent 45%),
+        radial-gradient(1100px 700px at 15% -10%, rgba(96,165,250,.20) 0%, transparent 45%),
+        radial-gradient(900px 560px at 95% 10%, rgba(45,212,191,.18) 0%, transparent 45%),
+        radial-gradient(800px 520px at 65% 115%, rgba(251,191,36,.10) 0%, transparent 40%),
         var(--bg);
       color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+      overflow-x:hidden;
     }
-    .card{
-      width:min(920px,100%);
-      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0)) , var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,.45);
-      padding:28px 28px 24px;
-      position:relative;
-      overflow:hidden;
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:12px 0;
     }
-    .card:before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(90deg,transparent,rgba(45,212,191,.12),transparent),
-        repeating-linear-gradient(180deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);
-      opacity:.35; pointer-events:none;
-    }
-    header{
-      display:flex; align-items:center; gap:14px;
-      margin-bottom:18px;
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      text-decoration:none;
     }
     .logo{
-      width:42px;height:42px;border-radius:12px;
-      background:conic-gradient(from 180deg at 50% 50%, #2dd4bf, #60a5fa, #2dd4bf);
-      display:grid;place-items:center;color:#001;
-      font-weight:900;
-      box-shadow:0 0 0 4px rgba(45,212,191,.15);
+      width:40px;height:40px;border-radius:12px;
+      background:conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent2), var(--accent));
+      box-shadow:0 0 0 4px rgba(45,212,191,.14);
+      display:grid;place-items:center;
+      font-weight:900;color:#001;
+      letter-spacing:.5px;
     }
-    h1{font-size:28px;margin:0}
-    .badge{
-      margin-left:auto;
-      font-size:12px;color:#062a26;background:rgba(45,212,191,.9);
-      padding:6px 10px;border-radius:999px;font-weight:700;
+    .brand b{font-size:16px;letter-spacing:.3px}
+    .brand span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+    .navlinks{
+      display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;
     }
-    .grid{
-      display:grid; grid-template-columns:1.2fr .8fr; gap:18px;
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(2,6,23,.45);
+      padding:9px 12px;border-radius:999px;
+      text-decoration:none;font-size:13px;color:var(--muted);
+      transition:transform .15s ease, border-color .15s ease, color .15s ease;
     }
-    @media (max-width:820px){
-      .grid{grid-template-columns:1fr}
-    }
-    .panel{
-      border:1px dashed var(--line);
-      border-radius:14px; padding:18px;
-      background:rgba(0,0,0,.2);
-    }
-    .title{font-size:22px;margin:0 0 8px}
-    .muted{color:var(--muted)}
-    .term{
-      background:#020617;border:1px solid var(--line);
-      border-radius:12px; padding:14px; margin-top:12px;
-      font-size:13px; line-height:1.6;
-    }
-    .term b{color:var(--accent)}
-    .progress{
+    .pill:hover{transform:translateY(-1px);border-color:rgba(45,212,191,.45);color:var(--text)}
+    .hero{
       margin-top:14px;
-      height:10px;border-radius:999px;background:#020617;border:1px solid var(--line);
+      display:grid;grid-template-columns:1.12fr .88fr;gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width:920px){.hero{grid-template-columns:1fr}}
+    .card{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0)), var(--panel);
+      box-shadow:var(--shadow);
       overflow:hidden;
     }
-    .bar{
-      height:100%; width:72%;
-      background:linear-gradient(90deg,#2dd4bf,#60a5fa);
-      animation:pulse 2.2s ease-in-out infinite;
+    .card::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
+        linear-gradient(90deg, transparent, rgba(45,212,191,.10), transparent);
+      opacity:.35;pointer-events:none;
     }
-    @keyframes pulse{
-      0%,100%{filter:saturate(1)}
-      50%{filter:saturate(1.6)}
-    }
-    .list{display:grid; gap:10px; margin-top:10px}
-    .li{
-      display:flex; gap:10px; align-items:flex-start;
-      border:1px solid var(--line); border-radius:12px; padding:10px 12px;
-      background:rgba(2,6,23,.6);
-      font-size:13px;
+    .pad{padding:22px}
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid rgba(45,212,191,.35);
+      background:rgba(45,212,191,.08);
+      padding:8px 12px;border-radius:999px;
+      font-size:12px;color:#baf7ee;
     }
     .dot{
       width:8px;height:8px;border-radius:50%;
-      background:var(--accent); margin-top:6px; flex:0 0 auto;
-      box-shadow:0 0 12px rgba(45,212,191,.8);
+      background:var(--accent);
+      box-shadow:0 0 16px rgba(45,212,191,.85);
     }
-    footer{
-      display:flex; gap:12px; align-items:center; margin-top:16px; flex-wrap:wrap;
+    h1{
+      font-size:44px;line-height:1.05;margin:14px 0 10px;
+      letter-spacing:-.5px;
     }
-    .cta{
-      text-decoration:none; color:#001; background:var(--warn);
-      padding:10px 14px;border-radius:10px;font-weight:800;
+    @media (max-width:520px){h1{font-size:36px}}
+    .sub{
+      color:var(--muted);
+      font-size:16px;line-height:1.65;margin:0 0 18px;
+      max-width:58ch;
     }
-    .small{font-size:12px;color:var(--muted)}
+    .ctaRow{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+      margin-top:12px;
+    }
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      text-decoration:none;
+      padding:12px 14px;border-radius:12px;
+      font-weight:800;font-size:14px;
+      display:inline-flex;align-items:center;gap:10px;
+      transition:transform .15s ease, filter .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.15)}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001}
+    .btn.secondary{
+      background:rgba(2,6,23,.65);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .btn.warn{background:var(--warn);color:#001}
+    .mini{
+      font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px
+    }
+
+    .rightTop{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+      margin-bottom:12px;
+    }
+    .tag{
+      border:1px solid var(--line);
+      background:rgba(2,6,23,.55);
+      color:var(--muted);
+      font-size:12px;
+      padding:7px 10px;border-radius:999px;
+      white-space:nowrap;
+    }
+    .count{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(2,6,23,.6);
+      padding:14px;
+    }
+    .count h3{margin:0 0 10px;font-size:14px;color:var(--muted);font-weight:700}
+    .timegrid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+    }
+    @media (max-width:520px){.timegrid{grid-template-columns:repeat(2,1fr)}}
+    .tbox{
+      border:1px solid rgba(31,41,55,.9);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0)), var(--panel2);
+      border-radius:14px;padding:12px;
+    }
+    .num{font-size:26px;font-weight:900;letter-spacing:.3px}
+    .lbl{font-size:12px;color:var(--muted);margin-top:2px}
+    .bar{
+      height:10px;border-radius:999px;border:1px solid var(--line);
+      background:#020617;overflow:hidden;margin-top:12px;
+    }
+    .bar > i{
+      display:block;height:100%;width:72%;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      animation:pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.6)}}
+
+    .section{
+      margin-top:18px;
+      display:grid;grid-template-columns:repeat(12,1fr);gap:18px;
+    }
+    .col6{grid-column:span 6}
+    .col4{grid-column:span 4}
+    .col8{grid-column:span 8}
+    .col12{grid-column:span 12}
+    @media (max-width:920px){
+      .col6,.col4,.col8{grid-column:span 12}
+    }
+    .h2{font-size:22px;margin:0 0 8px}
+    .muted{color:var(--muted);line-height:1.7;margin:0}
+    .feat{
+      display:flex;gap:12px;align-items:flex-start;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(2,6,23,.5);
+      padding:14px;
+    }
+    .ico{
+      width:38px;height:38px;border-radius:14px;
+      background:rgba(45,212,191,.12);
+      border:1px solid rgba(45,212,191,.25);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+      font-weight:900;color:#baf7ee;
+    }
+    .feat b{display:block;margin-bottom:4px}
+    .feat p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+
+    .road{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(2,6,23,.55);
+      padding:14px;
+    }
+    .row{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:12px;border-radius:14px;
+      border:1px solid rgba(31,41,55,.85);
+      background:rgba(0,0,0,.15);
+      margin-bottom:10px;
+    }
+    .row:last-child{margin-bottom:0}
+    .badge{
+      font-size:12px;font-weight:900;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(2,6,23,.65);
+      color:var(--muted);
+      flex:0 0 auto;
+    }
+    .badge.ok{color:#04230f;background:rgba(52,211,153,.95);border-color:rgba(52,211,153,.6)}
+    .badge.now{color:#052a26;background:rgba(45,212,191,.95);border-color:rgba(45,212,191,.6)}
+    .badge.next{color:#1f1403;background:rgba(251,191,36,.95);border-color:rgba(251,191,36,.6)}
+    .row b{display:block}
+    .row .desc{margin:2px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+
+    .form{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(2,6,23,.55);
+      padding:16px;
+    }
+    .form label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
+    .inputRow{display:flex;gap:10px;flex-wrap:wrap}
+    input[type="email"]{
+      flex:1 1 240px;
+      background:#020617;
+      border:1px solid rgba(31,41,55,.9);
+      border-radius:12px;
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+    }
+    input[type="email"]::placeholder{color:#64748b}
+    .note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+    .footer{
+      margin:22px 0 10px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      color:var(--muted);font-size:12px;
+      border-top:1px solid rgba(31,41,55,.8);
+      padding-top:14px;
+    }
+    .kbd{
+      border:1px solid rgba(31,41,55,.9);
+      background:rgba(2,6,23,.55);
+      padding:2px 7px;border-radius:8px;color:var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size:12px;
+    }
+    .tinyLinks a{color:var(--muted);text-decoration:none}
+    .tinyLinks a:hover{color:var(--text)}
   </style>
 </head>
 
 <body>
-  <main class="card">
-    <header>
-      <div class="logo">TD</div>
-      <h1>THAI-DEV</h1>
-      <span class="badge">COMING SOON</span>
-    </header>
-
-    <section class="grid">
-      <div class="panel">
-        <h2 class="title">SYSTEM REBOOT IN PROGRESS</h2>
-        <p class="muted">
-          กำลังสร้างแพลตฟอร์มสำหรับนักพัฒนา ช่างวิศวกร และสายเทคโนโลยีที่ “ทำงานจริง”
-        </p>
-
-        <div class="term">
-          <div><b>STATUS</b></div>
-          <div>• Domain & DNS: <b>ONLINE</b></div>
-          <div>• Cloudflare & SSL: <b>ACTIVE</b></div>
-          <div>• Platform Build: <b>IN PROGRESS</b></div>
+  <div class="wrap">
+    <!-- NAV -->
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="THAI-DEV Home">
+        <div class="logo">TD</div>
+        <div>
+          <b>THAI-DEV.ONLINE</b>
+          <span>Platform Launch • 2026</span>
         </div>
+      </a>
+      <div class="navlinks">
+        <a class="pill" href="#why">Why</a>
+        <a class="pill" href="#features">Features</a>
+        <a class="pill" href="#roadmap">Roadmap</a>
+        <a class="pill" href="#join">Join</a>
+        <a class="pill" href="#links">Links</a>
+      </div>
+    </div>
 
-        <div class="progress"><div class="bar"></div></div>
+    <!-- HERO -->
+    <section id="top" class="hero">
+      <div class="card">
+        <div class="pad">
+          <div class="kicker"><span class="dot"></span> SYSTEM ONLINE • BUILD IN PROGRESS</div>
+          <h1>Thai-Dev Platform<br/>Launch 2026</h1>
+          <p class="sub">
+            พื้นที่ของคนทำงานจริง — นักพัฒนา · ช่าง · วิศวกร · นักวิจัย
+            ศูนย์รวม <b>ความรู้เชิงลึก</b>, <b>เครื่องมือภาคสนาม</b>, และ <b>ชุมชน</b>
+            ที่สร้างจากประสบการณ์จริง ไม่ขายฝัน
+          </p>
 
-        <footer>
-          <a class="cta" href="#" onclick="return false;">Notify Me</a>
-          <span class="small">Work Hard • Work Smart • Work Real</span>
-        </footer>
+          <div class="ctaRow">
+            <a class="btn primary" href="#join">เริ่มต้น / ติดตามข่าว</a>
+            <a class="btn secondary" href="#roadmap">ดูแผนงาน 2026</a>
+            <a class="btn warn" href="#links">เปิดลิงก์สำคัญ</a>
+          </div>
+
+          <div class="mini">
+            Slogan: <b>Work Hard</b> · <b>Work Smart</b> · <b>Work Real</b><br/>
+            Status: Domain + Cloudflare + Pages ✅ | Content & Tools 🔧
+          </div>
+        </div>
       </div>
 
-      <div class="panel">
-        <h3 class="title">WHAT’S COMING</h3>
-        <div class="list">
-          <div class="li"><span class="dot"></span><div>Technical Knowledge Hub (TH/EN)</div></div>
-          <div class="li"><span class="dot"></span><div>Tools & Utilities (Field-Proven)</div></div>
-          <div class="li"><span class="dot"></span><div>AI-Assisted Analysis (No Hype)</div></div>
-          <div class="li"><span class="dot"></span><div>Docs / API / Community</div></div>
+      <div class="card">
+        <div class="pad">
+          <div class="rightTop">
+            <div class="kicker" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.08);color:#cfe5ff;">
+              <span class="dot" style="background:var(--accent2);box-shadow:0 0 16px rgba(96,165,250,.8)"></span>
+              COUNTDOWN TO 2026
+            </div>
+            <div class="tag">thai-dev.online</div>
+          </div>
+
+          <div class="count">
+            <h3>นับถอยหลังสู่ปี 2026 (ตั้งค่าเริ่มต้น: 1 ม.ค. 2026)</h3>
+            <div class="timegrid" aria-live="polite">
+              <div class="tbox"><div class="num" id="dd">--</div><div class="lbl">Days</div></div>
+              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
+              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
+              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Seconds</div></div>
+            </div>
+            <div class="bar" title="Build progress"><i></i></div>
+            <div class="mini">TIP: ถ้าอยากเปลี่ยนวันเปิดตัวจริง (เช่น 2026-03-01) แก้ค่า <span class="kbd">LAUNCH_DATE</span> ในสคริปต์ท้ายไฟล์ได้เลย</div>
+          </div>
         </div>
       </div>
     </section>
-  </main>
+
+    <!-- WHY -->
+    <section id="why" class="section">
+      <div class="card col8">
+        <div class="pad">
+          <div class="h2">Why Thai-Dev</div>
+          <p class="muted">
+            เราไม่ได้สร้างเพื่อ “ดูดี” อย่างเดียว แต่สร้างเพื่อ <b>ใช้งานจริง</b>:
+            คู่มือเชิงลึกจากภาคสนาม, เครื่องมือสำหรับงานซ่อม/วิจัย, และระบบจัดระเบียบความรู้ที่ค้นหาได้ง่าย
+            เพื่อให้คนทำงานจริง “ไปต่อได้ไวขึ้น”
+          </p>
+
+          <div style="height:14px"></div>
+
+          <div class="section" style="margin-top:0;gap:12px">
+            <div class="feat col6">
+              <div class="ico">KN</div>
+              <div>
+                <b>Knowledge Hub</b>
+                <p>คู่มือ/บทความเชิงลึก (TH/EN) โครงสร้างชัด ค้นง่าย อัปเดตได้</p>
+              </div>
+            </div>
+            <div class="feat col6">
+              <div class="ico">TL</div>
+              <div>
+                <b>Tools & Utilities</b>
+                <p>เครื่องมือช่วยวิเคราะห์/ทดสอบ/ภาคสนาม เน้น “ทำงานได้จริง”</p>
+              </div>
+            </div>
+            <div class="feat col6">
+              <div class="ico">AI</div>
+              <div>
+                <b>AI-Assisted (No Hype)</b>
+                <p>ใช้ AI เพื่อช่วยสรุป วิเคราะห์ และทำงานซ้ำ ๆ ให้เร็วขึ้น ไม่มั่ว ไม่ขายฝัน</p>
+              </div>
+            </div>
+            <div class="feat col6">
+              <div class="ico">CM</div>
+              <div>
+                <b>Community</b>
+                <p>พื้นที่แลกเปลี่ยนเคสจริง แชร์เทคนิค ช่วยกันยกระดับงานช่าง/วิศวกร</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="card col4">
+        <div class="pad">
+          <div class="h2">Quick Start</div>
+          <p class="muted">ลิงก์สำหรับวางระบบต่อยอด (แก้ URL ภายหลังได้)</p>
+
+          <div style="height:10px"></div>
+
+          <div class="road">
+            <div class="row">
+              <span class="badge now">Docs</span>
+              <div>
+                <b>docs.thai-dev.online</b>
+                <div class="desc">คู่มือ/ความรู้ (แนะนำทำเป็น Docs site)</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">Lab</span>
+              <div>
+                <b>lab.thai-dev.online</b>
+                <div class="desc">ทดลอง/เดโม/เบต้า (ค่อยเปิด)</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">API</span>
+              <div>
+                <b>api.thai-dev.online</b>
+                <div class="desc">ปลายทาง API (อนาคต)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            ตอนนี้หน้าเว็บนี้คือ <b>Landing 2026</b>  
+            ส่วน docs/lab/api จะทำทีละขั้นตาม Roadmap
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="card col12">
+        <div class="pad">
+          <div class="h2">Core Features (2026)</div>
+          <p class="muted">
+            โครงสร้างฟีเจอร์แบบ “ค่อยเป็นค่อยไป” แต่ไปไกล:
+            เริ่มจาก Landing + Docs ก่อน แล้วค่อยปล่อย Lab/Tools/Integration
+          </p>
+
+          <div style="height:14px"></div>
+
+          <div class="section" style="margin-top:0;gap:12px">
+            <div class="feat col4">
+              <div class="ico">DB</div>
+              <div>
+                <b>Structured Knowledge</b>
+                <p>จัดหมวดหมู่ชัด: PMIC / Panel / Tools / Firmware / Field notes</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">DX</div>
+              <div>
+                <b>Developer Experience</b>
+                <p>เอกสารอ่านง่าย ตัวอย่างชัด โค้ด/ไฟล์ดาวน์โหลด/เช็กลิสต์</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">SEC</div>
+              <div>
+                <b>Security First</b>
+                <p>Cloudflare: SSL, DDoS, WAF (ตามแพ็กเกจ), Bot protection</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">OPS</div>
+              <div>
+                <b>Ops Ready</b>
+                <p>พร้อมต่อยอดเป็น API / Automation / Release pipeline</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">MED</div>
+              <div>
+                <b>Media & Learning</b>
+                <p>วิดีโอ/ภาพ/อินโฟกราฟิก/คู่มือ A4 สำหรับช่าง</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">PRO</div>
+              <div>
+                <b>Pro Area (Optional)</b>
+                <p>พื้นที่สมาชิก/ไฟล์เฉพาะ/เบต้า/เครื่องมือขั้นสูง (ถ้าพร้อม)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            *หมายเหตุ: หน้านี้เป็น Landing Page แบบ “พร้อมขยาย”  
+            คุณแก้ไขข้อความ/เมนู/ลิงก์ได้ทั้งหมดในไฟล์เดียว
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+      <div class="card col12">
+        <div class="pad">
+          <div class="h2">Roadmap 2026</div>
+          <p class="muted">แผนนี้ “ทำจริงได้” ไม่เพ้อเจ้อ — เน้นปล่อยทีละส่วนให้ใช้งานได้ตลอด</p>
+
+          <div style="height:14px"></div>
+
+          <div class="road">
+            <div class="row">
+              <span class="badge ok">DONE</span>
+              <div>
+                <b>Phase 0 — Foundation (Now)</b>
+                <div class="desc">Domain · Cloudflare DNS · Pages · SSL — พร้อมเปิดตัวพื้นฐานแล้ว</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge now">Q1</span>
+              <div>
+                <b>Phase 1 — Landing + Docs v1</b>
+                <div class="desc">Landing 2026 + เปิด docs.thai-dev.online + โครงสารบัญความรู้ + บทความชุดแรก</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">Q2</span>
+              <div>
+                <b>Phase 2 — Lab + Tools Beta</b>
+                <div class="desc">เปิด lab.thai-dev.online + เดโม/เครื่องมือชุดแรก + ฟีดแบ็กจากภาคสนาม</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">Q3–Q4</span>
+              <div>
+                <b>Phase 3 — API + Automation + Pro (Optional)</b>
+                <div class="desc">api.thai-dev.online + Integration + ระบบสมาชิก/ไฟล์โปร (ถ้าจำเป็น)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            อยากให้พี่เจเจแตก Roadmap เป็น “งานรายเดือน + เช็กลิสต์ทำทีละขั้น” บอกได้เลย เดี๋ยวจัดให้แบบเดินงานได้จริง
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN -->
+    <section id="join" class="section">
+      <div class="card col6">
+        <div class="pad">
+          <div class="h2">Join / Notify</div>
+          <p class="muted">
+            ตอนนี้ฟอร์มนี้เป็น <b>UI ตัวอย่าง</b> (ยังไม่ส่งอีเมลจริง)  
+            ถ้าเอฟต้องการให้ “เก็บอีเมลจริง” เดี๋ยวพี่เจเจต่อให้ด้วย Mailchimp / Buttondown / Google Form / หรือ API ภายหลังได้
+          </p>
+
+          <div style="height:12px"></div>
+
+          <div class="form">
+            <label for="email">อีเมลสำหรับรับข่าวเปิดตัว</label>
+            <div class="inputRow">
+              <input id="email" type="email" placeholder="you@example.com" />
+              <button class="btn primary" id="notifyBtn" type="button">Notify Me</button>
+            </div>
+            <div class="note" id="formNote">
+              กดปุ่มแล้วจะขึ้นข้อความยืนยัน (ตัวอย่าง) — ยังไม่ส่งข้อมูลออกนอกเว็บ
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card col6" id="links">
+        <div class="pad">
+          <div class="h2">Links</div>
+          <p class="muted">ตั้งลิงก์หลักไว้ก่อน เดี๋ยวค่อยเติมจริง</p>
+
+          <div style="height:12px"></div>
+
+          <div class="road">
+            <div class="row">
+              <span class="badge now">WEB</span>
+              <div>
+                <b>thai-dev.online</b>
+                <div class="desc">Landing / News / Updates</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">DOCS</span>
+              <div>
+                <b>docs.thai-dev.online</b>
+                <div class="desc">Knowledge Hub (กำลังสร้าง)</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">LAB</span>
+              <div>
+                <b>lab.thai-dev.online</b>
+                <div class="desc">Beta / Demo / Tools (กำลังวาง)</div>
+              </div>
+            </div>
+            <div class="row">
+              <span class="badge next">API</span>
+              <div>
+                <b>api.thai-dev.online</b>
+                <div class="desc">API endpoint (อนาคต)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini">
+            ถ้าเอฟมี Facebook/YouTube/Repo แล้ว ส่งลิงก์มา เดี๋ยวพี่เจเจใส่ปุ่ม Social ให้แบบเนียน ๆ
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div>© <span id="yy"></span> THAI-DEV • Built from real work.</div>
+      <div class="tinyLinks">
+        <a href="#top">Back to top</a> ·
+        <a href="#join">Notify</a> ·
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === CONFIG ===
+    // เปลี่ยนวันเปิดตัวจริงได้ที่นี่ (รูปแบบ: YYYY-MM-DDTHH:mm:ss+07:00)
+    // ตัวอย่างเปิดตัว 1 มี.ค. 2026 เวลา 10:00 ไทย:
+    // const LAUNCH_DATE = "2026-03-01T10:00:00+07:00";
+    const LAUNCH_DATE = "2026-01-01T00:00:00+07:00";
+
+    function pad2(n){ return String(n).padStart(2, "0"); }
+
+    function tick(){
+      const end = new Date(LAUNCH_DATE).getTime();
+      const now = Date.now();
+      let diff = Math.max(0, end - now);
+
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = Math.floor(sec % 60);
+
+      document.getElementById("dd").textContent = String(days);
+      document.getElementById("hh").textContent = pad2(hours);
+      document.getElementById("mm").textContent = pad2(mins);
+      document.getElementById("ss").textContent = pad2(secs);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+
+    // Footer year
+    document.getElementById("yy").textContent = new Date().getFullYear();
+
+    // Demo notify button (no external submit)
+    document.getElementById("notifyBtn").addEventListener("click", () => {
+      const v = (document.getElementById("email").value || "").trim();
+      const note = document.getElementById("formNote");
+      if(!v || !v.includes("@")){
+        note.textContent = "ใส่อีเมลให้ถูกก่อนนะครับ (ตอนนี้เป็นตัวอย่าง ยังไม่ส่งข้อมูลออกไป)";
+        note.style.color = "var(--bad)";
+        return;
+      }
+      note.textContent = "รับทราบ! (ตัวอย่าง) — ถ้าต้องการให้เก็บอีเมลจริง เดี๋ยวพี่เจเจต่อระบบให้ได้";
+      note.style.color = "var(--ok)";
+    });
+  </script>
 </body>
 </html>
