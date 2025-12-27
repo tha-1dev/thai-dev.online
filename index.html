@@ -1,680 +1,1304 @@
 <!doctype html>
-<html lang="th">
+<html lang="th" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>THAI-DEV.ONLINE — Launch 2026</title>
-  <meta name="description" content="Thai-Dev Platform 2026 — Knowledge, Tools, Community for real-world engineers & developers. Work Hard · Work Smart · Work Real." />
+  <meta name="description" content="THAI-DEV Platform 2026 — Modern Thai Luxury. Knowledge · Tools · Community. Powered by Thai-Dev." />
   <meta name="theme-color" content="#0b0f14" />
-  <meta property="og:title" content="THAI-DEV.ONLINE — Launch 2026" />
-  <meta property="og:description" content="A platform built from real work — Knowledge · Tools · Community." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://thai-dev.online/" />
-  <!-- Optional: add og:image later -->
+
   <style>
+    /* =========================
+       Modern Thai Luxury System
+       Dark Wood + Matte Black + Gold
+       Glassmorphism + Premium Typography
+       ========================= */
+
     :root{
-      --bg:#0b0f14;
-      --panel:#0f1623;
-      --panel2:#0b1320;
-      --line:#1f2937;
-      --text:#e6edf3;
-      --muted:#9aa4b2;
-      --accent:#2dd4bf;
-      --accent2:#60a5fa;
-      --warn:#fbbf24;
-      --bad:#fb7185;
-      --ok:#34d399;
-      --shadow: 0 22px 70px rgba(0,0,0,.55);
-      --radius: 18px;
+      /* Core */
+      --bg: #07090c;
+      --bg2:#0b0f14;
+      --text:#f3f4f6;
+      --muted:#a7b0bd;
+
+      /* Luxury accents */
+      --gold:#d6b25e;
+      --gold2:#f2d07c;
+      --gold3:#8a6b2a;
+
+      /* Surfaces */
+      --panel: rgba(10,12,16,.62);
+      --glass: rgba(255,255,255,.06);
+      --glass2: rgba(255,255,255,.08);
+      --line: rgba(255,255,255,.10);
+      --line2: rgba(214,178,94,.22);
+
+      /* Shadows */
+      --shadow: 0 26px 80px rgba(0,0,0,.60);
+      --shadow2: 0 18px 48px rgba(0,0,0,.45);
+
+      /* Radii */
+      --r16:16px;
+      --r20:20px;
+      --r24:24px;
+
+      /* Timing */
+      --ease: cubic-bezier(.2,.8,.2,1);
+
+      /* Typography */
+      --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Thai", "Noto Sans", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
     }
+
+    /* Light mode palette */
+    html[data-theme="light"]{
+      --bg:#f7f3ea;
+      --bg2:#fbf8f1;
+      --text:#141618;
+      --muted:#47505c;
+
+      --panel: rgba(255,255,255,.72);
+      --glass: rgba(255,255,255,.55);
+      --glass2: rgba(255,255,255,.65);
+      --line: rgba(10,12,16,.12);
+      --line2: rgba(214,178,94,.28);
+
+      --shadow: 0 26px 80px rgba(20,22,24,.18);
+      --shadow2: 0 18px 48px rgba(20,22,24,.12);
+    }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Thai", "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1100px 700px at 15% -10%, rgba(96,165,250,.20) 0%, transparent 45%),
-        radial-gradient(900px 560px at 95% 10%, rgba(45,212,191,.18) 0%, transparent 45%),
-        radial-gradient(800px 520px at 65% 115%, rgba(251,191,36,.10) 0%, transparent 40%),
-        var(--bg);
+      font-family:var(--font-sans);
       color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% -10%, rgba(214,178,94,.18), transparent 45%),
+        radial-gradient(900px 520px at 92% 10%, rgba(0,0,0,.35), transparent 55%),
+        radial-gradient(800px 600px at 60% 120%, rgba(214,178,94,.10), transparent 40%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       overflow-x:hidden;
     }
-    a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:22px}
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:16px;padding:12px 0;
+
+    /* “Modern Thai luxury interior” vibe: subtle wood grain overlay */
+    .woodgrain{
+      pointer-events:none;
+      position:fixed; inset:0;
+      opacity:.20;
+      background:
+        repeating-linear-gradient( 105deg,
+          rgba(214,178,94,.10) 0 2px,
+          rgba(0,0,0,0) 2px 16px
+        ),
+        radial-gradient(1100px 700px at 30% 30%, rgba(214,178,94,.10), transparent 60%);
+      mix-blend-mode: overlay;
+      filter: blur(.2px);
     }
+
+    /* =========================
+       Layout
+       ========================= */
+    .wrap{max-width:1160px;margin:0 auto;padding:20px 20px 34px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;
+      padding:12px 0 6px;
+    }
+
+    /* =========================
+       Logo (Thai motif + gold)
+       ========================= */
     .brand{
       display:flex;align-items:center;gap:12px;
-      text-decoration:none;
+      text-decoration:none;color:inherit;
     }
     .logo{
-      width:40px;height:40px;border-radius:12px;
-      background:conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent2), var(--accent));
-      box-shadow:0 0 0 4px rgba(45,212,191,.14);
+      width:44px;height:44px;border-radius:14px;
+      background: radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.28), rgba(255,255,255,0)),
+                  linear-gradient(135deg, rgba(214,178,94,.95), rgba(242,208,124,.72));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 0 0 4px rgba(214,178,94,.10);
       display:grid;place-items:center;
-      font-weight:900;color:#001;
-      letter-spacing:.5px;
-    }
-    .brand b{font-size:16px;letter-spacing:.3px}
-    .brand span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
-    .navlinks{
-      display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;
-    }
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(2,6,23,.45);
-      padding:9px 12px;border-radius:999px;
-      text-decoration:none;font-size:13px;color:var(--muted);
-      transition:transform .15s ease, border-color .15s ease, color .15s ease;
-    }
-    .pill:hover{transform:translateY(-1px);border-color:rgba(45,212,191,.45);color:var(--text)}
-    .hero{
-      margin-top:14px;
-      display:grid;grid-template-columns:1.12fr .88fr;gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width:920px){.hero{grid-template-columns:1fr}}
-    .card{
       position:relative;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0)), var(--panel);
-      box-shadow:var(--shadow);
       overflow:hidden;
     }
-    .card::before{
+    .logo:before{
       content:"";
-      position:absolute;inset:0;
-      background:
-        repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
-        linear-gradient(90deg, transparent, rgba(45,212,191,.10), transparent);
-      opacity:.35;pointer-events:none;
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.22), rgba(255,255,255,.0));
+      animation: shine 5.2s var(--ease) infinite;
+      opacity:.55;
     }
-    .pad{padding:22px}
-    .kicker{
-      display:inline-flex;align-items:center;gap:10px;
-      border:1px solid rgba(45,212,191,.35);
-      background:rgba(45,212,191,.08);
-      padding:8px 12px;border-radius:999px;
-      font-size:12px;color:#baf7ee;
+    @keyframes shine{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    .logo svg{position:relative; z-index:1}
+    .brandTitle{
+      line-height:1.15;
     }
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 16px rgba(45,212,191,.85);
+    .brandTitle b{
+      font-family:var(--font-display);
+      letter-spacing:.5px;
+      font-size:16px;
     }
-    h1{
-      font-size:44px;line-height:1.05;margin:14px 0 10px;
-      letter-spacing:-.5px;
-    }
-    @media (max-width:520px){h1{font-size:36px}}
-    .sub{
+    .brandTitle span{
+      display:block;
+      font-family:var(--font-mono);
+      font-size:12px;
       color:var(--muted);
-      font-size:16px;line-height:1.65;margin:0 0 18px;
-      max-width:58ch;
+      margin-top:2px;
     }
-    .ctaRow{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-      margin-top:12px;
-    }
-    .btn{
-      appearance:none;border:0;cursor:pointer;
-      text-decoration:none;
-      padding:12px 14px;border-radius:12px;
-      font-weight:800;font-size:14px;
-      display:inline-flex;align-items:center;gap:10px;
-      transition:transform .15s ease, filter .15s ease, border-color .15s ease;
+
+    /* =========================
+       Controls
+       ========================= */
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding:9px 12px;border-radius:999px;
+      font-size:13px;color:var(--muted);
+      cursor:pointer;
+      transition: transform .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease);
       user-select:none;
     }
-    .btn:hover{transform:translateY(-1px);filter:saturate(1.15)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001}
-    .btn.secondary{
-      background:rgba(2,6,23,.65);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-    .btn.warn{background:var(--warn);color:#001}
-    .mini{
-      font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px
-    }
+    .chip:hover{transform:translateY(-1px);border-color:var(--line2);color:var(--text)}
+    .langToggle, .themeToggle{display:flex;gap:8px;align-items:center}
 
-    .rightTop{
-      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
-      margin-bottom:12px;
-    }
-    .tag{
+    /* =========================
+       GlassCard
+       ========================= */
+    .glassCard{
       border:1px solid var(--line);
-      background:rgba(2,6,23,.55);
-      color:var(--muted);
-      font-size:12px;
-      padding:7px 10px;border-radius:999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)) , var(--panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      border-radius: var(--r24);
+      position:relative;
+      overflow:hidden;
+    }
+    .glassCard:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 300px at 20% 0%, rgba(214,178,94,.16), transparent 60%),
+        radial-gradient(520px 240px at 100% 30%, rgba(255,255,255,.08), transparent 55%),
+        repeating-linear-gradient(180deg, rgba(255,255,255,.06) 0 1px, transparent 1px 4px);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .cardPad{padding:22px; position:relative; z-index:1}
+
+    /* =========================
+       GoldButton
+       ========================= */
+    .goldBtn{
+      appearance:none;border:0;cursor:pointer;
+      padding:12px 14px;border-radius:14px;
+      font-weight:900; letter-spacing:.2px;
+      color:#1a1204;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      box-shadow: 0 14px 30px rgba(214,178,94,.20);
+      display:inline-flex;align-items:center;gap:10px;
+      text-decoration:none;
+      transition: transform .15s var(--ease), filter .15s var(--ease);
+      user-select:none;
       white-space:nowrap;
     }
-    .count{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:rgba(2,6,23,.6);
-      padding:14px;
+    .goldBtn:hover{transform:translateY(-1px);filter:saturate(1.15)}
+    .ghostBtn{
+      appearance:none;border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color:var(--text);
+      padding:12px 14px;border-radius:14px;
+      font-weight:800;
+      display:inline-flex;align-items:center;gap:10px;
+      text-decoration:none;
+      cursor:pointer;
+      transition: transform .15s var(--ease), border-color .15s var(--ease);
+      white-space:nowrap;
     }
-    .count h3{margin:0 0 10px;font-size:14px;color:var(--muted);font-weight:700}
-    .timegrid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-    }
-    @media (max-width:520px){.timegrid{grid-template-columns:repeat(2,1fr)}}
-    .tbox{
-      border:1px solid rgba(31,41,55,.9);
-      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0)), var(--panel2);
-      border-radius:14px;padding:12px;
-    }
-    .num{font-size:26px;font-weight:900;letter-spacing:.3px}
-    .lbl{font-size:12px;color:var(--muted);margin-top:2px}
-    .bar{
-      height:10px;border-radius:999px;border:1px solid var(--line);
-      background:#020617;overflow:hidden;margin-top:12px;
-    }
-    .bar > i{
-      display:block;height:100%;width:72%;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      animation:pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.6)}}
+    .ghostBtn:hover{transform:translateY(-1px);border-color:var(--line2)}
 
-    .section{
-      margin-top:18px;
-      display:grid;grid-template-columns:repeat(12,1fr);gap:18px;
+    /* =========================
+       Hero
+       ========================= */
+    .hero{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      align-items:stretch;
     }
+    @media (max-width:980px){.hero{grid-template-columns:1fr}}
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid var(--line2);
+      background: rgba(214,178,94,.10);
+      color: rgba(242,208,124,1);
+      padding:8px 12px;border-radius:999px;
+      font-size:12px;
+      font-family:var(--font-mono);
+    }
+    .pulseDot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--gold2);
+      box-shadow:0 0 18px rgba(242,208,124,.75);
+      animation: pd 1.6s var(--ease) infinite;
+    }
+    @keyframes pd{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+    h1{
+      margin:14px 0 10px;
+      font-family:var(--font-display);
+      letter-spacing:.4px;
+      font-size:46px;
+      line-height:1.05;
+    }
+    @media (max-width:520px){h1{font-size:38px}}
+    .subtitle{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:16px;
+      margin:0 0 14px;
+      max-width:64ch;
+    }
+    .ctaRow{
+      display:flex;gap:10px;flex-wrap:wrap;
+      margin-top:14px;
+      align-items:center;
+    }
+    .mini{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.7;
+      font-family:var(--font-mono);
+    }
+
+    /* =========================
+       Heartbeat Line Animation
+       ========================= */
+    .hbWrap{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 14px 10px;
+      background: rgba(0,0,0,.12);
+    }
+    html[data-theme="light"] .hbWrap{background: rgba(255,255,255,.35)}
+    .hbHeader{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-bottom:10px;
+      font-family:var(--font-mono);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .hbCanvas{
+      width:100%;
+      height:84px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(120px 60px at 20% 50%, rgba(214,178,94,.10), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+    }
+    html[data-theme="light"] .hbCanvas{
+      border-color: rgba(10,12,16,.10);
+      background:
+        radial-gradient(140px 70px at 20% 50%, rgba(214,178,94,.16), transparent 70%),
+        linear-gradient(180deg, rgba(10,12,16,.06), rgba(10,12,16,0));
+    }
+
+    /* =========================
+       Tiles / Sections
+       ========================= */
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:16px;
+    }
+    .col12{grid-column:span 12}
+    .col8{grid-column:span 8}
     .col6{grid-column:span 6}
     .col4{grid-column:span 4}
-    .col8{grid-column:span 8}
-    .col12{grid-column:span 12}
-    @media (max-width:920px){
-      .col6,.col4,.col8{grid-column:span 12}
-    }
-    .h2{font-size:22px;margin:0 0 8px}
-    .muted{color:var(--muted);line-height:1.7;margin:0}
+    @media (max-width:980px){.col8,.col6,.col4{grid-column:span 12}}
+    .h2{font-family:var(--font-display);font-size:22px;margin:0 0 8px;letter-spacing:.3px}
+    .muted{color:var(--muted);margin:0;line-height:1.7}
     .feat{
       display:flex;gap:12px;align-items:flex-start;
       border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(2,6,23,.5);
+      border-radius:18px;
+      background: rgba(255,255,255,.03);
       padding:14px;
     }
     .ico{
-      width:38px;height:38px;border-radius:14px;
-      background:rgba(45,212,191,.12);
-      border:1px solid rgba(45,212,191,.25);
+      width:40px;height:40px;border-radius:16px;
       display:grid;place-items:center;
+      border:1px solid var(--line2);
+      background: rgba(214,178,94,.10);
+      color: var(--gold2);
+      font-family:var(--font-mono);
+      font-weight:900;
       flex:0 0 auto;
-      font-weight:900;color:#baf7ee;
     }
-    .feat b{display:block;margin-bottom:4px}
-    .feat p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+    .feat b{display:block}
+    .feat p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.65}
 
     .road{
       border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(2,6,23,.55);
+      border-radius:18px;
+      background: rgba(255,255,255,.03);
       padding:14px;
     }
     .row{
       display:flex;gap:12px;align-items:flex-start;
-      padding:12px;border-radius:14px;
-      border:1px solid rgba(31,41,55,.85);
-      background:rgba(0,0,0,.15);
+      padding:12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      background: rgba(0,0,0,.10);
       margin-bottom:10px;
     }
+    html[data-theme="light"] .row{background: rgba(255,255,255,.30); border-color: rgba(10,12,16,.10)}
     .row:last-child{margin-bottom:0}
     .badge{
+      font-family:var(--font-mono);
       font-size:12px;font-weight:900;
       padding:6px 10px;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(2,6,23,.65);
-      color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
       flex:0 0 auto;
+      white-space:nowrap;
     }
-    .badge.ok{color:#04230f;background:rgba(52,211,153,.95);border-color:rgba(52,211,153,.6)}
-    .badge.now{color:#052a26;background:rgba(45,212,191,.95);border-color:rgba(45,212,191,.6)}
-    .badge.next{color:#1f1403;background:rgba(251,191,36,.95);border-color:rgba(251,191,36,.6)}
-    .row b{display:block}
-    .row .desc{margin:2px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+    .badge.done{background: rgba(52,211,153,.90); color:#071a12; border-color: rgba(52,211,153,.55)}
+    .badge.now{background: rgba(214,178,94,.92); color:#1a1204; border-color: rgba(214,178,94,.55)}
+    .badge.next{background: rgba(96,165,250,.90); color:#071428; border-color: rgba(96,165,250,.55)}
 
-    .form{
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(2,6,23,.55);
-      padding:16px;
-    }
-    .form label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}
-    .inputRow{display:flex;gap:10px;flex-wrap:wrap}
-    input[type="email"]{
-      flex:1 1 240px;
-      background:#020617;
-      border:1px solid rgba(31,41,55,.9);
-      border-radius:12px;
-      padding:12px 12px;
-      color:var(--text);
-      outline:none;
-    }
-    input[type="email"]::placeholder{color:#64748b}
-    .note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
-
+    /* =========================
+       Footer / Legal
+       ========================= */
     .footer{
-      margin:22px 0 10px;
-      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      color:var(--muted);font-size:12px;
-      border-top:1px solid rgba(31,41,55,.8);
+      margin:20px 0 6px;
+      border-top:1px solid rgba(255,255,255,.10);
       padding-top:14px;
-    }
-    .kbd{
-      border:1px solid rgba(31,41,55,.9);
-      background:rgba(2,6,23,.55);
-      padding:2px 7px;border-radius:8px;color:var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      color:var(--muted);
       font-size:12px;
+      display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
     }
-    .tinyLinks a{color:var(--muted);text-decoration:none}
-    .tinyLinks a:hover{color:var(--text)}
+    .legal{
+      max-width:74ch;
+      line-height:1.65;
+      font-family:var(--font-mono);
+    }
+    .links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .link{
+      color:var(--muted);
+      text-decoration:none;
+      border-bottom:1px dotted rgba(214,178,94,.35);
+    }
+    .link:hover{color:var(--text)}
+
+    /* =========================
+       Splash Screen (2–3 sec)
+       ========================= */
+    .splash{
+      position:fixed; inset:0;
+      z-index:9999;
+      display:flex; align-items:center; justify-content:center;
+      background:
+        radial-gradient(900px 560px at 40% 20%, rgba(214,178,94,.18), transparent 55%),
+        radial-gradient(900px 560px at 90% 10%, rgba(0,0,0,.45), transparent 60%),
+        linear-gradient(180deg, #06070a, #0b0f14);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+    html[data-theme="light"] .splash{
+      background:
+        radial-gradient(900px 560px at 40% 20%, rgba(214,178,94,.22), transparent 55%),
+        radial-gradient(900px 560px at 90% 10%, rgba(10,12,16,.10), transparent 60%),
+        linear-gradient(180deg, #faf6ee, #fffaf1);
+    }
+    .splash.hide{
+      opacity:0;
+      transform: translateY(-8px);
+      pointer-events:none;
+    }
+    .splashCard{
+      width:min(860px,92vw);
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.24);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    html[data-theme="light"] .splashCard{
+      background: rgba(255,255,255,.60);
+      border-color: rgba(10,12,16,.10);
+    }
+    .splashPad{padding:22px 22px 18px; position:relative}
+    .splashTop{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:10px;
+    }
+    .splashTitle{
+      display:flex; align-items:center; gap:12px;
+    }
+    .splashTitle b{
+      font-family:var(--font-display);
+      letter-spacing:.4px;
+      font-size:18px;
+    }
+    .splashTitle span{
+      display:block;
+      font-family:var(--font-mono);
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
+    }
+    .splashMsg{
+      color:var(--muted);
+      line-height:1.7;
+      margin:8px 0 10px;
+      font-size:13px;
+    }
+    .progressWrap{
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      height:12px;
+    }
+    html[data-theme="light"] .progressWrap{
+      background: rgba(10,12,16,.06);
+      border-color: rgba(10,12,16,.10);
+    }
+    .progressBar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 22px rgba(214,178,94,.24);
+      transition: width .18s var(--ease);
+    }
+    .splashBottom{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-top:10px;
+      font-family:var(--font-mono);
+      font-size:12px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .loading{
+      display:inline-flex;align-items:center;gap:10px;
+    }
+    .loading i{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--gold2);
+      box-shadow:0 0 16px rgba(242,208,124,.65);
+      animation: blink 1.0s var(--ease) infinite;
+    }
+    @keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+
+    /* Small helper */
+    .sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- NAV -->
-    <div class="nav">
+  <div class="woodgrain" aria-hidden="true"></div>
+
+  <!-- Splash Screen (2–3 seconds) -->
+  <div class="splash" id="splash" role="dialog" aria-modal="true" aria-label="Loading">
+    <div class="splashCard">
+      <div class="splashPad">
+        <div class="splashTop">
+          <div class="splashTitle">
+            <div class="logo" aria-hidden="true">
+              <!-- Simple Thai motif (placeholder). Replace later with your real logo SVG -->
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2c2.4 2 3.9 4.3 4.3 6.6.5 2.9-1 5.8-3.9 7.2-1.2.6-2 1.5-2 2.7 0 1.4 1.2 2.5 2.7 2.5H17"
+                  stroke="rgba(15,10,2,.95)" stroke-width="2.1" stroke-linecap="round"/>
+                <path d="M7 8c.6-2.6 2.1-4.6 5-6" stroke="rgba(15,10,2,.55)" stroke-width="2.1" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <b>THAI-DEV • Splash</b>
+              <span>Modern Thai Luxury • 2026</span>
+            </div>
+          </div>
+
+          <div class="controls" style="gap:8px">
+            <button class="chip" id="splashLangBtn" type="button" title="Language">TH/EN</button>
+            <button class="chip" id="splashThemeBtn" type="button" title="Theme">Dark/Light</button>
+          </div>
+        </div>
+
+        <div class="splashMsg" id="splashMsg">
+          กำลังโหลดระบบ… แสงอบอุ่นสะท้อนทองคำบนผนังไม้เข้มและ Matte Black
+        </div>
+
+        <!-- Heartbeat animation canvas -->
+        <div class="hbWrap" style="margin-top:10px">
+          <div class="hbHeader">
+            <span>Heartbeat Signal</span>
+            <span id="hbState">LIVE</span>
+          </div>
+          <canvas class="hbCanvas" id="hb" width="980" height="200"></canvas>
+          <span class="sr">Heartbeat animation indicates system loading</span>
+        </div>
+
+        <div class="progressWrap" aria-label="Loading progress">
+          <div class="progressBar" id="pbar"></div>
+        </div>
+
+        <div class="splashBottom">
+          <div class="loading"><i></i><span id="loadingText">Loading…</span></div>
+          <div><span id="pct">0%</span> · <span id="eta">~2–3s</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="wrap" id="main" style="opacity:0; transform:translateY(6px); transition:opacity .55s var(--ease), transform .55s var(--ease);">
+    <!-- Topbar -->
+    <div class="topbar">
       <a class="brand" href="#top" aria-label="THAI-DEV Home">
-        <div class="logo">TD</div>
-        <div>
+        <div class="logo" aria-hidden="true">
+          <!-- Replace later with your real Thai gold logo -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2c2.4 2 3.9 4.3 4.3 6.6.5 2.9-1 5.8-3.9 7.2-1.2.6-2 1.5-2 2.7 0 1.4 1.2 2.5 2.7 2.5H17"
+              stroke="rgba(15,10,2,.95)" stroke-width="2.1" stroke-linecap="round"/>
+            <path d="M7 8c.6-2.6 2.1-4.6 5-6" stroke="rgba(15,10,2,.55)" stroke-width="2.1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brandTitle">
           <b>THAI-DEV.ONLINE</b>
-          <span>Platform Launch • 2026</span>
+          <span>Powered by Thai-Dev • All PMIC Tools Edition 2026</span>
         </div>
       </a>
-      <div class="navlinks">
-        <a class="pill" href="#why">Why</a>
-        <a class="pill" href="#features">Features</a>
-        <a class="pill" href="#roadmap">Roadmap</a>
-        <a class="pill" href="#join">Join</a>
-        <a class="pill" href="#links">Links</a>
+
+      <div class="controls">
+        <div class="langToggle">
+          <button class="chip" id="langBtn" type="button">ภาษาไทย</button>
+        </div>
+        <div class="themeToggle">
+          <button class="chip" id="themeBtn" type="button">Dark Mode</button>
+        </div>
+        <a class="goldBtn" href="#join" id="primaryCta">
+          <span id="ctaText">ติดตามเปิดตัว</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
 
     <!-- HERO -->
     <section id="top" class="hero">
-      <div class="card">
-        <div class="pad">
-          <div class="kicker"><span class="dot"></span> SYSTEM ONLINE • BUILD IN PROGRESS</div>
-          <h1>Thai-Dev Platform<br/>Launch 2026</h1>
-          <p class="sub">
-            พื้นที่ของคนทำงานจริง — นักพัฒนา · ช่าง · วิศวกร · นักวิจัย
-            ศูนย์รวม <b>ความรู้เชิงลึก</b>, <b>เครื่องมือภาคสนาม</b>, และ <b>ชุมชน</b>
-            ที่สร้างจากประสบการณ์จริง ไม่ขายฝัน
+      <div class="glassCard">
+        <div class="cardPad">
+          <div class="kicker"><span class="pulseDot"></span><span id="kickerText">SYSTEM ONLINE • LAUNCH 2026</span></div>
+          <h1 id="heroTitle">Modern Thai Luxury<br/>Tech Platform 2026</h1>
+          <p class="subtitle" id="heroSub">
+            พื้นที่ของคนทำงานจริง: นักพัฒนา · ช่าง · วิศวกร · นักวิจัย
+            รวมความรู้เชิงลึก เครื่องมือภาคสนาม และชุมชน — โทนหรูหรา Modern Thai Luxury
+            (Dark Wood · Matte Black · Gold) พร้อม Dark/Light mode
           </p>
 
           <div class="ctaRow">
-            <a class="btn primary" href="#join">เริ่มต้น / ติดตามข่าว</a>
-            <a class="btn secondary" href="#roadmap">ดูแผนงาน 2026</a>
-            <a class="btn warn" href="#links">เปิดลิงก์สำคัญ</a>
+            <a class="goldBtn" href="#roadmap" id="btnRoadmap"><span id="btnRoadmapText">ดู Roadmap</span>→</a>
+            <a class="ghostBtn" href="#features" id="btnFeatures"><span id="btnFeaturesText">ฟีเจอร์หลัก</span>↘</a>
+            <a class="ghostBtn" href="#links" id="btnLinks"><span id="btnLinksText">ลิงก์ระบบ</span>⧉</a>
           </div>
 
-          <div class="mini">
-            Slogan: <b>Work Hard</b> · <b>Work Smart</b> · <b>Work Real</b><br/>
-            Status: Domain + Cloudflare + Pages ✅ | Content & Tools 🔧
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="pad">
-          <div class="rightTop">
-            <div class="kicker" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.08);color:#cfe5ff;">
-              <span class="dot" style="background:var(--accent2);box-shadow:0 0 16px rgba(96,165,250,.8)"></span>
-              COUNTDOWN TO 2026
-            </div>
-            <div class="tag">thai-dev.online</div>
-          </div>
-
-          <div class="count">
-            <h3>นับถอยหลังสู่ปี 2026 (ตั้งค่าเริ่มต้น: 1 ม.ค. 2026)</h3>
-            <div class="timegrid" aria-live="polite">
-              <div class="tbox"><div class="num" id="dd">--</div><div class="lbl">Days</div></div>
-              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
-              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
-              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Seconds</div></div>
-            </div>
-            <div class="bar" title="Build progress"><i></i></div>
-            <div class="mini">TIP: ถ้าอยากเปลี่ยนวันเปิดตัวจริง (เช่น 2026-03-01) แก้ค่า <span class="kbd">LAUNCH_DATE</span> ในสคริปต์ท้ายไฟล์ได้เลย</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section id="why" class="section">
-      <div class="card col8">
-        <div class="pad">
-          <div class="h2">Why Thai-Dev</div>
-          <p class="muted">
-            เราไม่ได้สร้างเพื่อ “ดูดี” อย่างเดียว แต่สร้างเพื่อ <b>ใช้งานจริง</b>:
-            คู่มือเชิงลึกจากภาคสนาม, เครื่องมือสำหรับงานซ่อม/วิจัย, และระบบจัดระเบียบความรู้ที่ค้นหาได้ง่าย
-            เพื่อให้คนทำงานจริง “ไปต่อได้ไวขึ้น”
-          </p>
-
-          <div style="height:14px"></div>
-
-          <div class="section" style="margin-top:0;gap:12px">
-            <div class="feat col6">
-              <div class="ico">KN</div>
-              <div>
-                <b>Knowledge Hub</b>
-                <p>คู่มือ/บทความเชิงลึก (TH/EN) โครงสร้างชัด ค้นง่าย อัปเดตได้</p>
-              </div>
-            </div>
-            <div class="feat col6">
-              <div class="ico">TL</div>
-              <div>
-                <b>Tools & Utilities</b>
-                <p>เครื่องมือช่วยวิเคราะห์/ทดสอบ/ภาคสนาม เน้น “ทำงานได้จริง”</p>
-              </div>
-            </div>
-            <div class="feat col6">
-              <div class="ico">AI</div>
-              <div>
-                <b>AI-Assisted (No Hype)</b>
-                <p>ใช้ AI เพื่อช่วยสรุป วิเคราะห์ และทำงานซ้ำ ๆ ให้เร็วขึ้น ไม่มั่ว ไม่ขายฝัน</p>
-              </div>
-            </div>
-            <div class="feat col6">
-              <div class="ico">CM</div>
-              <div>
-                <b>Community</b>
-                <p>พื้นที่แลกเปลี่ยนเคสจริง แชร์เทคนิค ช่วยกันยกระดับงานช่าง/วิศวกร</p>
-              </div>
-            </div>
+          <div class="mini" id="miniText">
+            UX Best Practice: Splash แสดง ~2–3 วินาที + มีสถานะ Loading/Progress
           </div>
         </div>
       </div>
 
-      <!-- Quick Links -->
-      <div class="card col4">
-        <div class="pad">
-          <div class="h2">Quick Start</div>
-          <p class="muted">ลิงก์สำหรับวางระบบต่อยอด (แก้ URL ภายหลังได้)</p>
+      <div class="glassCard">
+        <div class="cardPad">
+          <div class="h2" style="margin-top:0" id="countTitle">Countdown to 2026</div>
+          <p class="muted" id="countSub">ตั้งค่าเริ่มต้น: 1 ม.ค. 2026 (แก้วันได้ในตัวแปร LAUNCH_DATE)</p>
 
-          <div style="height:10px"></div>
-
-          <div class="road">
+          <div class="road" style="margin-top:12px">
             <div class="row">
-              <span class="badge now">Docs</span>
+              <span class="badge now" id="bNow">NOW</span>
               <div>
-                <b>docs.thai-dev.online</b>
-                <div class="desc">คู่มือ/ความรู้ (แนะนำทำเป็น Docs site)</div>
+                <b id="statA">Domain + Cloudflare + Pages</b>
+                <div class="muted" style="font-size:13px" id="statADesc">ออนไลน์แล้ว พร้อมวาง Landing/Docs/Lab ต่อทันที</div>
               </div>
             </div>
             <div class="row">
-              <span class="badge next">Lab</span>
+              <span class="badge next" id="bNext">NEXT</span>
               <div>
-                <b>lab.thai-dev.online</b>
-                <div class="desc">ทดลอง/เดโม/เบต้า (ค่อยเปิด)</div>
-              </div>
-            </div>
-            <div class="row">
-              <span class="badge next">API</span>
-              <div>
-                <b>api.thai-dev.online</b>
-                <div class="desc">ปลายทาง API (อนาคต)</div>
+                <b id="statB">Docs / Lab / API Subdomains</b>
+                <div class="muted" style="font-size:13px" id="statBDesc">แตกงานเป็นโมดูล พร้อมขยายจักรวาลแบบมืออาชีพ</div>
               </div>
             </div>
           </div>
 
-          <div class="mini">
-            ตอนนี้หน้าเว็บนี้คือ <b>Landing 2026</b>  
-            ส่วน docs/lab/api จะทำทีละขั้นตาม Roadmap
+          <div class="hbWrap" style="margin-top:12px">
+            <div class="hbHeader">
+              <span id="hb2Title">Heartbeat • Data Loading</span>
+              <span id="hb2Tip">Minimalist Signal</span>
+            </div>
+            <canvas class="hbCanvas" id="hb2" width="980" height="200"></canvas>
+          </div>
+
+          <div class="mini" id="countMini">
+            Tip: Dark Mode ทำให้สัญญาณสีทอง/สว่างโดดเด่น (Minimalist Style)
           </div>
         </div>
       </div>
     </section>
 
     <!-- FEATURES -->
-    <section id="features" class="section">
-      <div class="card col12">
-        <div class="pad">
-          <div class="h2">Core Features (2026)</div>
-          <p class="muted">
-            โครงสร้างฟีเจอร์แบบ “ค่อยเป็นค่อยไป” แต่ไปไกล:
-            เริ่มจาก Landing + Docs ก่อน แล้วค่อยปล่อย Lab/Tools/Integration
-          </p>
+    <section id="features" class="grid">
+      <div class="glassCard col12">
+        <div class="cardPad">
+          <div class="h2" id="featTitle">Core Features (2026)</div>
+          <p class="muted" id="featSub">ออกแบบเป็นระบบ: Knowledge → Tools → Community → Automation</p>
 
-          <div style="height:14px"></div>
-
-          <div class="section" style="margin-top:0;gap:12px">
+          <div class="grid" style="margin-top:12px">
             <div class="feat col4">
-              <div class="ico">DB</div>
+              <div class="ico">KN</div>
               <div>
-                <b>Structured Knowledge</b>
-                <p>จัดหมวดหมู่ชัด: PMIC / Panel / Tools / Firmware / Field notes</p>
+                <b id="f1">Knowledge Hub</b>
+                <p id="f1d">คู่มือ/บทความเชิงลึก TH/EN โครงสร้างชัด ค้นง่าย อัปเดตได้</p>
               </div>
             </div>
             <div class="feat col4">
-              <div class="ico">DX</div>
+              <div class="ico">TL</div>
               <div>
-                <b>Developer Experience</b>
-                <p>เอกสารอ่านง่าย ตัวอย่างชัด โค้ด/ไฟล์ดาวน์โหลด/เช็กลิสต์</p>
+                <b id="f2">Tools & Utilities</b>
+                <p id="f2d">เครื่องมือภาคสนามสำหรับงานซ่อม/วิจัย เน้นใช้งานจริง</p>
+              </div>
+            </div>
+            <div class="feat col4">
+              <div class="ico">UX</div>
+              <div>
+                <b id="f3">Premium UX</b>
+                <p id="f3d">Dark/Light, Glassmorphism, Gold actions, โทน Modern Thai Luxury</p>
               </div>
             </div>
             <div class="feat col4">
               <div class="ico">SEC</div>
               <div>
-                <b>Security First</b>
-                <p>Cloudflare: SSL, DDoS, WAF (ตามแพ็กเกจ), Bot protection</p>
+                <b id="f4">Security First</b>
+                <p id="f4d">Cloudflare SSL/DDoS/Bot protection พร้อมต่อยอด WAF</p>
               </div>
             </div>
             <div class="feat col4">
-              <div class="ico">OPS</div>
+              <div class="ico">LAB</div>
               <div>
-                <b>Ops Ready</b>
-                <p>พร้อมต่อยอดเป็น API / Automation / Release pipeline</p>
+                <b id="f5">Lab & Beta</b>
+                <p id="f5d">พื้นที่ทดลอง เดโม เบต้า และโปรเจกต์ย่อยแบบแยกโมดูล</p>
               </div>
             </div>
             <div class="feat col4">
-              <div class="ico">MED</div>
+              <div class="ico">API</div>
               <div>
-                <b>Media & Learning</b>
-                <p>วิดีโอ/ภาพ/อินโฟกราฟิก/คู่มือ A4 สำหรับช่าง</p>
-              </div>
-            </div>
-            <div class="feat col4">
-              <div class="ico">PRO</div>
-              <div>
-                <b>Pro Area (Optional)</b>
-                <p>พื้นที่สมาชิก/ไฟล์เฉพาะ/เบต้า/เครื่องมือขั้นสูง (ถ้าพร้อม)</p>
+                <b id="f6">API Ready</b>
+                <p id="f6d">วางโครงเชื่อมต่อระบบ/แอป/AI ในอนาคตแบบไม่เละ</p>
               </div>
             </div>
           </div>
 
-          <div class="mini">
-            *หมายเหตุ: หน้านี้เป็น Landing Page แบบ “พร้อมขยาย”  
-            คุณแก้ไขข้อความ/เมนู/ลิงก์ได้ทั้งหมดในไฟล์เดียว
-          </div>
         </div>
       </div>
     </section>
 
     <!-- ROADMAP -->
-    <section id="roadmap" class="section">
-      <div class="card col12">
-        <div class="pad">
-          <div class="h2">Roadmap 2026</div>
-          <p class="muted">แผนนี้ “ทำจริงได้” ไม่เพ้อเจ้อ — เน้นปล่อยทีละส่วนให้ใช้งานได้ตลอด</p>
+    <section id="roadmap" class="grid">
+      <div class="glassCard col12">
+        <div class="cardPad">
+          <div class="h2" id="rmTitle">Roadmap 2026</div>
+          <p class="muted" id="rmSub">ทำจริงได้ — ปล่อยทีละชิ้นให้ใช้ได้ตลอด ไม่รอ “สมบูรณ์แบบ”</p>
 
-          <div style="height:14px"></div>
-
-          <div class="road">
+          <div class="road" style="margin-top:12px">
             <div class="row">
-              <span class="badge ok">DONE</span>
+              <span class="badge done" id="r0b">DONE</span>
               <div>
-                <b>Phase 0 — Foundation (Now)</b>
-                <div class="desc">Domain · Cloudflare DNS · Pages · SSL — พร้อมเปิดตัวพื้นฐานแล้ว</div>
+                <b id="r0">Phase 0 — Foundation</b>
+                <div class="muted" style="font-size:13px" id="r0d">Domain · DNS · Pages · SSL พร้อมแล้ว</div>
               </div>
             </div>
             <div class="row">
-              <span class="badge now">Q1</span>
+              <span class="badge now" id="r1b">Q1</span>
               <div>
-                <b>Phase 1 — Landing + Docs v1</b>
-                <div class="desc">Landing 2026 + เปิด docs.thai-dev.online + โครงสารบัญความรู้ + บทความชุดแรก</div>
+                <b id="r1">Phase 1 — Landing + Docs v1</b>
+                <div class="muted" style="font-size:13px" id="r1d">โครงสารบัญความรู้ + บทความชุดแรก + UX/Brand</div>
               </div>
             </div>
             <div class="row">
-              <span class="badge next">Q2</span>
+              <span class="badge next" id="r2b">Q2</span>
               <div>
-                <b>Phase 2 — Lab + Tools Beta</b>
-                <div class="desc">เปิด lab.thai-dev.online + เดโม/เครื่องมือชุดแรก + ฟีดแบ็กจากภาคสนาม</div>
+                <b id="r2">Phase 2 — Lab + Tools Beta</b>
+                <div class="muted" style="font-size:13px" id="r2d">เดโมเครื่องมือ + รับฟีดแบ็กภาคสนาม</div>
               </div>
             </div>
             <div class="row">
-              <span class="badge next">Q3–Q4</span>
+              <span class="badge next" id="r3b">Q3–Q4</span>
               <div>
-                <b>Phase 3 — API + Automation + Pro (Optional)</b>
-                <div class="desc">api.thai-dev.online + Integration + ระบบสมาชิก/ไฟล์โปร (ถ้าจำเป็น)</div>
+                <b id="r3">Phase 3 — API + Automation + Pro Area (Optional)</b>
+                <div class="muted" style="font-size:13px" id="r3d">เชื่อมระบบ / จัดการไฟล์ / สมาชิก / สิทธิ์เข้าถึง</div>
               </div>
             </div>
           </div>
 
-          <div class="mini">
-            อยากให้พี่เจเจแตก Roadmap เป็น “งานรายเดือน + เช็กลิสต์ทำทีละขั้น” บอกได้เลย เดี๋ยวจัดให้แบบเดินงานได้จริง
-          </div>
+          <p class="mini" id="rmMini" style="margin-top:10px">
+            © Copyright 2026 Powered By Thai-Dev | สงวนลิขสิทธิ์ทุกประการ
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- JOIN -->
-    <section id="join" class="section">
-      <div class="card col6">
-        <div class="pad">
-          <div class="h2">Join / Notify</div>
-          <p class="muted">
-            ตอนนี้ฟอร์มนี้เป็น <b>UI ตัวอย่าง</b> (ยังไม่ส่งอีเมลจริง)  
-            ถ้าเอฟต้องการให้ “เก็บอีเมลจริง” เดี๋ยวพี่เจเจต่อให้ด้วย Mailchimp / Buttondown / Google Form / หรือ API ภายหลังได้
-          </p>
+    <!-- LINKS + JOIN -->
+    <section id="links" class="grid">
+      <div class="glassCard col6">
+        <div class="cardPad">
+          <div class="h2" id="lkTitle">System Links</div>
+          <p class="muted" id="lkSub">ตั้งไว้ก่อน เดี๋ยวค่อยเปิดจริงตาม Roadmap</p>
 
-          <div style="height:12px"></div>
-
-          <div class="form">
-            <label for="email">อีเมลสำหรับรับข่าวเปิดตัว</label>
-            <div class="inputRow">
-              <input id="email" type="email" placeholder="you@example.com" />
-              <button class="btn primary" id="notifyBtn" type="button">Notify Me</button>
-            </div>
-            <div class="note" id="formNote">
-              กดปุ่มแล้วจะขึ้นข้อความยืนยัน (ตัวอย่าง) — ยังไม่ส่งข้อมูลออกนอกเว็บ
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card col6" id="links">
-        <div class="pad">
-          <div class="h2">Links</div>
-          <p class="muted">ตั้งลิงก์หลักไว้ก่อน เดี๋ยวค่อยเติมจริง</p>
-
-          <div style="height:12px"></div>
-
-          <div class="road">
+          <div class="road" style="margin-top:12px">
             <div class="row">
               <span class="badge now">WEB</span>
               <div>
                 <b>thai-dev.online</b>
-                <div class="desc">Landing / News / Updates</div>
+                <div class="muted" style="font-size:13px" id="lk1">Landing / News / Launch</div>
               </div>
             </div>
             <div class="row">
               <span class="badge next">DOCS</span>
               <div>
                 <b>docs.thai-dev.online</b>
-                <div class="desc">Knowledge Hub (กำลังสร้าง)</div>
+                <div class="muted" style="font-size:13px" id="lk2">Knowledge Hub</div>
               </div>
             </div>
             <div class="row">
               <span class="badge next">LAB</span>
               <div>
                 <b>lab.thai-dev.online</b>
-                <div class="desc">Beta / Demo / Tools (กำลังวาง)</div>
+                <div class="muted" style="font-size:13px" id="lk3">Beta / Demo / Tools</div>
               </div>
             </div>
             <div class="row">
               <span class="badge next">API</span>
               <div>
                 <b>api.thai-dev.online</b>
-                <div class="desc">API endpoint (อนาคต)</div>
+                <div class="muted" style="font-size:13px" id="lk4">Future endpoints</div>
               </div>
             </div>
           </div>
 
-          <div class="mini">
-            ถ้าเอฟมี Facebook/YouTube/Repo แล้ว ส่งลิงก์มา เดี๋ยวพี่เจเจใส่ปุ่ม Social ให้แบบเนียน ๆ
+          <p class="mini" style="margin-top:10px" id="repoLine">
+            Repo connected: github.com/tha-1dev/thai-dev.online ✅
+          </p>
+        </div>
+      </div>
+
+      <div class="glassCard col6" id="join">
+        <div class="cardPad">
+          <div class="h2" id="jnTitle">Join / Notify</div>
+          <p class="muted" id="jnSub">
+            UX: Splash ไม่เกิน 2–3 วินาที + มีสถานะ Loading/Progress เพื่อบอกว่าระบบไม่ค้าง
+          </p>
+
+          <div class="road" style="margin-top:12px">
+            <div class="row">
+              <span class="badge now" id="formBadge">FORM</span>
+              <div style="flex:1">
+                <b id="formTitle">รับข่าวเปิดตัว (Demo UI)</b>
+                <div class="muted" style="font-size:13px" id="formDesc">ตอนนี้เป็น UI ตัวอย่าง ยังไม่ส่งออกนอกเว็บ</div>
+
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
+                  <input id="email" type="email" placeholder="you@example.com"
+                         style="flex:1 1 240px; min-width:220px; padding:12px 12px; border-radius:14px;
+                                border:1px solid rgba(255,255,255,.10); background:rgba(0,0,0,.20);
+                                color:var(--text); outline:none;">
+                  <button class="goldBtn" id="notifyBtn" type="button"><span id="notifyText">Notify Me</span>→</button>
+                </div>
+
+                <div class="mini" id="formNote" style="margin-top:10px; font-family:var(--font-mono);">
+                  Loading… / Progress UI เป็นแนวทาง UX Best Practice
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ctaRow" style="margin-top:12px">
+            <a class="ghostBtn" href="#top" id="backTop">↑ Back to Top</a>
+            <a class="ghostBtn" href="#roadmap" id="goRm">↘ Roadmap</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer / Legal -->
     <div class="footer">
-      <div>© <span id="yy"></span> THAI-DEV • Built from real work.</div>
-      <div class="tinyLinks">
-        <a href="#top">Back to top</a> ·
-        <a href="#join">Notify</a> ·
-        <a href="#roadmap">Roadmap</a>
+      <div class="legal" id="legalText">
+        © <span id="yy"></span> Powered By Thai-Dev | สงวนลิขสิทธิ์ทุกประการ<br/>
+        ข้อสงวนสิทธิ์และเงื่อนไขการใช้งานสำหรับ Thai-Dev — Powered by Thai-Dev — All PMIC Tools Edition 2026
+      </div>
+      <div class="links">
+        <a class="link" href="#features" id="ftLink">Features</a>
+        <a class="link" href="#roadmap" id="rmLink">Roadmap</a>
+        <a class="link" href="#join" id="jnLink">Join</a>
       </div>
     </div>
   </div>
 
   <script>
-    // === CONFIG ===
-    // เปลี่ยนวันเปิดตัวจริงได้ที่นี่ (รูปแบบ: YYYY-MM-DDTHH:mm:ss+07:00)
-    // ตัวอย่างเปิดตัว 1 มี.ค. 2026 เวลา 10:00 ไทย:
-    // const LAUNCH_DATE = "2026-03-01T10:00:00+07:00";
+    /* =========================================
+       Config
+       ========================================= */
+    // Change launch date here (Thai timezone recommended)
     const LAUNCH_DATE = "2026-01-01T00:00:00+07:00";
 
-    function pad2(n){ return String(n).padStart(2, "0"); }
+    // Splash duration target (2–3 seconds UX best practice)
+    const SPLASH_MIN_MS = 2000;
+    const SPLASH_MAX_MS = 3000;
 
-    function tick(){
-      const end = new Date(LAUNCH_DATE).getTime();
-      const now = Date.now();
-      let diff = Math.max(0, end - now);
+    /* =========================================
+       Theme + Language State
+       ========================================= */
+    const root = document.documentElement;
+    let lang = "th"; // th / en
 
-      const sec = Math.floor(diff / 1000);
-      const days = Math.floor(sec / 86400);
-      const hours = Math.floor((sec % 86400) / 3600);
-      const mins = Math.floor((sec % 3600) / 60);
-      const secs = Math.floor(sec % 60);
-
-      document.getElementById("dd").textContent = String(days);
-      document.getElementById("hh").textContent = pad2(hours);
-      document.getElementById("mm").textContent = pad2(mins);
-      document.getElementById("ss").textContent = pad2(secs);
+    function setTheme(mode){
+      root.setAttribute("data-theme", mode);
+      // reflect in button labels
+      const isDark = mode === "dark";
+      document.getElementById("themeBtn").textContent = isDark ? "Dark Mode" : "Light Mode";
+      document.getElementById("splashThemeBtn").textContent = isDark ? "Dark/Light" : "Light/Dark";
+      // update meta theme-color lightly
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if(meta) meta.setAttribute("content", isDark ? "#0b0f14" : "#fbf8f1");
     }
 
-    tick();
-    setInterval(tick, 1000);
+    function toggleTheme(){
+      const cur = root.getAttribute("data-theme") || "dark";
+      setTheme(cur === "dark" ? "light" : "dark");
+      localStorage.setItem("td_theme", root.getAttribute("data-theme"));
+    }
 
-    // Footer year
-    document.getElementById("yy").textContent = new Date().getFullYear();
+    function setLang(next){
+      lang = next;
+      localStorage.setItem("td_lang", lang);
+      applyLang();
+    }
 
-    // Demo notify button (no external submit)
-    document.getElementById("notifyBtn").addEventListener("click", () => {
-      const v = (document.getElementById("email").value || "").trim();
-      const note = document.getElementById("formNote");
-      if(!v || !v.includes("@")){
-        note.textContent = "ใส่อีเมลให้ถูกก่อนนะครับ (ตอนนี้เป็นตัวอย่าง ยังไม่ส่งข้อมูลออกไป)";
-        note.style.color = "var(--bad)";
-        return;
+    function toggleLang(){
+      setLang(lang === "th" ? "en" : "th");
+    }
+
+    function applyLang(){
+      const th = (k)=>k; // readability
+      const en = (k)=>k;
+
+      const dict = {
+        th: {
+          langBtn: "ภาษาไทย",
+          ctaText: "ติดตามเปิดตัว",
+          kickerText: "SYSTEM ONLINE • LAUNCH 2026",
+          heroTitle: "Modern Thai Luxury<br/>Tech Platform 2026",
+          heroSub: "พื้นที่ของคนทำงานจริง: นักพัฒนา · ช่าง · วิศวกร · นักวิจัย รวมความรู้เชิงลึก เครื่องมือภาคสนาม และชุมชน — โทนหรูหรา Modern Thai Luxury (Dark Wood · Matte Black · Gold) พร้อม Dark/Light mode",
+          btnRoadmapText: "ดู Roadmap",
+          btnFeaturesText: "ฟีเจอร์หลัก",
+          btnLinksText: "ลิงก์ระบบ",
+          miniText: "UX Best Practice: Splash แสดง ~2–3 วินาที + มีสถานะ Loading/Progress",
+          countTitle: "Countdown to 2026",
+          countSub: "ตั้งค่าเริ่มต้น: 1 ม.ค. 2026 (แก้วันได้ในตัวแปร LAUNCH_DATE)",
+          bNow: "NOW",
+          bNext: "NEXT",
+          statA: "Domain + Cloudflare + Pages",
+          statADesc: "ออนไลน์แล้ว พร้อมวาง Landing/Docs/Lab ต่อทันที",
+          statB: "Docs / Lab / API Subdomains",
+          statBDesc: "แตกงานเป็นโมดูล พร้อมขยายจักรวาลแบบมืออาชีพ",
+          hb2Title: "Heartbeat • Data Loading",
+          hb2Tip: "Minimalist Signal",
+          countMini: "Tip: Dark Mode ทำให้สัญญาณสีทอง/สว่างโดดเด่น (Minimalist Style)",
+          featTitle: "Core Features (2026)",
+          featSub: "ออกแบบเป็นระบบ: Knowledge → Tools → Community → Automation",
+          f1: "Knowledge Hub", f1d: "คู่มือ/บทความเชิงลึก TH/EN โครงสร้างชัด ค้นง่าย อัปเดตได้",
+          f2: "Tools & Utilities", f2d: "เครื่องมือภาคสนามสำหรับงานซ่อม/วิจัย เน้นใช้งานจริง",
+          f3: "Premium UX", f3d: "Dark/Light, Glassmorphism, Gold actions, โทน Modern Thai Luxury",
+          f4: "Security First", f4d: "Cloudflare SSL/DDoS/Bot protection พร้อมต่อยอด WAF",
+          f5: "Lab & Beta", f5d: "พื้นที่ทดลอง เดโม เบต้า และโปรเจกต์ย่อยแบบแยกโมดูล",
+          f6: "API Ready", f6d: "วางโครงเชื่อมต่อระบบ/แอป/AI ในอนาคตแบบไม่เละ",
+          rmTitle: "Roadmap 2026",
+          rmSub: "ทำจริงได้ — ปล่อยทีละชิ้นให้ใช้ได้ตลอด ไม่รอ “สมบูรณ์แบบ”",
+          r0: "Phase 0 — Foundation", r0d: "Domain · DNS · Pages · SSL พร้อมแล้ว",
+          r1: "Phase 1 — Landing + Docs v1", r1d: "โครงสารบัญความรู้ + บทความชุดแรก + UX/Brand",
+          r2: "Phase 2 — Lab + Tools Beta", r2d: "เดโมเครื่องมือ + รับฟีดแบ็กภาคสนาม",
+          r3: "Phase 3 — API + Automation + Pro Area (Optional)", r3d: "เชื่อมระบบ / จัดการไฟล์ / สมาชิก / สิทธิ์เข้าถึง",
+          rmMini: "© Copyright 2026 Powered By Thai-Dev | สงวนลิขสิทธิ์ทุกประการ",
+          lkTitle: "System Links", lkSub: "ตั้งไว้ก่อน เดี๋ยวค่อยเปิดจริงตาม Roadmap",
+          lk1: "Landing / News / Launch",
+          lk2: "Knowledge Hub",
+          lk3: "Beta / Demo / Tools",
+          lk4: "Future endpoints",
+          repoLine: "ตอนนี้เชื่อมต่อ https://github.com/tha-1dev/thai-dev.online ได้แล้วครับ ✅",
+          jnTitle: "Join / Notify",
+          jnSub: "UX: Splash ไม่เกิน 2–3 วินาที + มีสถานะ Loading/Progress เพื่อบอกว่าระบบไม่ค้าง",
+          formBadge: "FORM",
+          formTitle: "รับข่าวเปิดตัว (Demo UI)",
+          formDesc: "ตอนนี้เป็น UI ตัวอย่าง ยังไม่ส่งออกนอกเว็บ",
+          notifyText: "Notify Me",
+          formNote: "Loading… / Progress UI เป็นแนวทาง UX Best Practice",
+          legalText: `© ${new Date().getFullYear()} Powered By Thai-Dev | สงวนลิขสิทธิ์ทุกประการ<br/>ข้อสงวนสิทธิ์และเงื่อนไขการใช้งานสำหรับ Thai-Dev — Powered by Thai-Dev — All PMIC Tools Edition 2026`,
+          ftLink: "Features",
+          rmLink: "Roadmap",
+          jnLink: "Join",
+          splashMsg: "กำลังโหลดระบบ… แสงอบอุ่นสะท้อนทองคำบนผนังไม้เข้มและ Matte Black",
+          loadingText: "Loading…",
+          hbState: "LIVE"
+        },
+        en: {
+          langBtn: "English",
+          ctaText: "Follow Launch",
+          kickerText: "SYSTEM ONLINE • LAUNCH 2026",
+          heroTitle: "Modern Thai Luxury<br/>Tech Platform 2026",
+          heroSub: "Built for real work: developers, technicians, engineers, researchers. Deep knowledge, field tools, and community — Modern Thai Luxury (Dark Wood · Matte Black · Gold) with Dark/Light modes.",
+          btnRoadmapText: "View Roadmap",
+          btnFeaturesText: "Core Features",
+          btnLinksText: "System Links",
+          miniText: "UX Best Practice: Splash ~2–3 seconds + Loading/Progress status",
+          countTitle: "Countdown to 2026",
+          countSub: "Default: Jan 1, 2026 (edit LAUNCH_DATE in the script)",
+          bNow: "NOW",
+          bNext: "NEXT",
+          statA: "Domain + Cloudflare + Pages",
+          statADesc: "Live and ready to expand into Landing/Docs/Lab",
+          statB: "Docs / Lab / API Subdomains",
+          statBDesc: "Modular structure — scalable and clean",
+          hb2Title: "Heartbeat • Data Loading",
+          hb2Tip: "Minimalist Signal",
+          countMini: "Tip: Dark mode makes bright/gold signals pop (Minimalist Style)",
+          featTitle: "Core Features (2026)",
+          featSub: "Designed as a system: Knowledge → Tools → Community → Automation",
+          f1: "Knowledge Hub", f1d: "Structured TH/EN docs, easy to navigate and maintain",
+          f2: "Tools & Utilities", f2d: "Field-ready tools for repair/research workflows",
+          f3: "Premium UX", f3d: "Dark/Light, Glassmorphism, Gold actions, luxury palette",
+          f4: "Security First", f4d: "Cloudflare SSL/DDoS/Bot protection, WAF-ready",
+          f5: "Lab & Beta", f5d: "A sandbox for demos, betas, and modular experiments",
+          f6: "API Ready", f6d: "Future-proof integration path for apps and AI",
+          rmTitle: "Roadmap 2026",
+          rmSub: "Practical releases — ship usable parts continuously",
+          r0: "Phase 0 — Foundation", r0d: "Domain · DNS · Pages · SSL done",
+          r1: "Phase 1 — Landing + Docs v1", r1d: "Docs structure + first content + brand/UX",
+          r2: "Phase 2 — Lab + Tools Beta", r2d: "First demos + field feedback loop",
+          r3: "Phase 3 — API + Automation + Pro Area (Optional)", r3d: "Integrations / access control / member features",
+          rmMini: "© Copyright 2026 Powered By Thai-Dev | All rights reserved",
+          lkTitle: "System Links", lkSub: "Placeholders now — will go live per roadmap",
+          lk1: "Landing / News / Launch",
+          lk2: "Knowledge Hub",
+          lk3: "Beta / Demo / Tools",
+          lk4: "Future endpoints",
+          repoLine: "Repo connected: https://github.com/tha-1dev/thai-dev.online ✅",
+          jnTitle: "Join / Notify",
+          jnSub: "UX: splash should not exceed 2–3 seconds; show progress to avoid “stuck” feel",
+          formBadge: "FORM",
+          formTitle: "Launch Updates (Demo UI)",
+          formDesc: "UI demo only — no external submit yet",
+          notifyText: "Notify Me",
+          formNote: "Loading… / Progress UI follows UX best practices",
+          legalText: `© ${new Date().getFullYear()} Powered By Thai-Dev | All rights reserved<br/>Terms & disclaimer for Thai-Dev — Powered by Thai-Dev — All PMIC Tools Edition 2026`,
+          ftLink: "Features",
+          rmLink: "Roadmap",
+          jnLink: "Join",
+          splashMsg: "Loading… warm ambient light on gold textures, dark wood and matte black walls.",
+          loadingText: "Loading…",
+          hbState: "LIVE"
+        }
+      };
+
+      const d = dict[lang];
+
+      // Buttons
+      document.getElementById("langBtn").textContent = d.langBtn;
+      document.getElementById("ctaText").textContent = d.ctaText;
+
+      // Hero
+      document.getElementById("kickerText").textContent = d.kickerText;
+      document.getElementById("heroTitle").innerHTML = d.heroTitle;
+      document.getElementById("heroSub").textContent = d.heroSub;
+      document.getElementById("btnRoadmapText").textContent = d.btnRoadmapText;
+      document.getElementById("btnFeaturesText").textContent = d.btnFeaturesText;
+      document.getElementById("btnLinksText").textContent = d.btnLinksText;
+      document.getElementById("miniText").textContent = d.miniText;
+
+      // Count area
+      document.getElementById("countTitle").textContent = d.countTitle;
+      document.getElementById("countSub").textContent = d.countSub;
+      document.getElementById("bNow").textContent = d.bNow;
+      document.getElementById("bNext").textContent = d.bNext;
+      document.getElementById("statA").textContent = d.statA;
+      document.getElementById("statADesc").textContent = d.statADesc;
+      document.getElementById("statB").textContent = d.statB;
+      document.getElementById("statBDesc").textContent = d.statBDesc;
+      document.getElementById("hb2Title").textContent = d.hb2Title;
+      document.getElementById("hb2Tip").textContent = d.hb2Tip;
+      document.getElementById("countMini").textContent = d.countMini;
+
+      // Features
+      document.getElementById("featTitle").textContent = d.featTitle;
+      document.getElementById("featSub").textContent = d.featSub;
+      document.getElementById("f1").textContent = d.f1; document.getElementById("f1d").textContent = d.f1d;
+      document.getElementById("f2").textContent = d.f2; document.getElementById("f2d").textContent = d.f2d;
+      document.getElementById("f3").textContent = d.f3; document.getElementById("f3d").textContent = d.f3d;
+      document.getElementById("f4").textContent = d.f4; document.getElementById("f4d").textContent = d.f4d;
+      document.getElementById("f5").textContent = d.f5; document.getElementById("f5d").textContent = d.f5d;
+      document.getElementById("f6").textContent = d.f6; document.getElementById("f6d").textContent = d.f6d;
+
+      // Roadmap
+      document.getElementById("rmTitle").textContent = d.rmTitle;
+      document.getElementById("rmSub").textContent = d.rmSub;
+      document.getElementById("r0").textContent = d.r0; document.getElementById("r0d").textContent = d.r0d;
+      document.getElementById("r1").textContent = d.r1; document.getElementById("r1d").textContent = d.r1d;
+      document.getElementById("r2").textContent = d.r2; document.getElementById("r2d").textContent = d.r2d;
+      document.getElementById("r3").textContent = d.r3; document.getElementById("r3d").textContent = d.r3d;
+      document.getElementById("rmMini").textContent = d.rmMini;
+
+      // Links
+      document.getElementById("lkTitle").textContent = d.lkTitle;
+      document.getElementById("lkSub").textContent = d.lkSub;
+      document.getElementById("lk1").textContent = d.lk1;
+      document.getElementById("lk2").textContent = d.lk2;
+      document.getElementById("lk3").textContent = d.lk3;
+      document.getElementById("lk4").textContent = d.lk4;
+      document.getElementById("repoLine").textContent = d.repoLine;
+
+      // Join
+      document.getElementById("jnTitle").textContent = d.jnTitle;
+      document.getElementById("jnSub").textContent = d.jnSub;
+      document.getElementById("formBadge").textContent = d.formBadge;
+      document.getElementById("formTitle").textContent = d.formTitle;
+      document.getElementById("formDesc").textContent = d.formDesc;
+      document.getElementById("notifyText").textContent = d.notifyText;
+      document.getElementById("formNote").textContent = d.formNote;
+
+      // Footer legal + nav labels
+      document.getElementById("legalText").innerHTML = d.legalText;
+      document.getElementById("ftLink").textContent = d.ftLink;
+      document.getElementById("rmLink").textContent = d.rmLink;
+      document.getElementById("jnLink").textContent = d.jnLink;
+
+      // Splash
+      document.getElementById("splashMsg").textContent = d.splashMsg;
+      document.getElementById("loadingText").textContent = d.loadingText;
+      document.getElementById("hbState").textContent = d.hbState;
+
+      // Button labels for theme might be overwritten elsewhere
+    }
+
+    /* =========================================
+       Countdown (optional display elsewhere later)
+       ========================================= */
+    function countdown(){
+      const end = new Date(LAUNCH_DATE).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, end - now);
+      return diff;
+    }
+
+    /* =========================================
+       Heartbeat Canvas (Minimalist)
+       ========================================= */
+    function startHeartbeat(canvasId){
+      const c = document.getElementById(canvasId);
+      const ctx = c.getContext("2d");
+
+      function resize(){
+        // keep crisp on different sizes
+        const rect = c.getBoundingClientRect();
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+        c.width = Math.floor(rect.width * dpr);
+        c.height = Math.floor(rect.height * dpr);
+        ctx.setTransform(dpr,0,0,dpr,0,0);
       }
-      note.textContent = "รับทราบ! (ตัวอย่าง) — ถ้าต้องการให้เก็บอีเมลจริง เดี๋ยวพี่เจเจต่อระบบให้ได้";
-      note.style.color = "var(--ok)";
-    });
+      resize();
+      window.addEventListener("resize", resize);
+
+      let t = 0;
+      // heartbeat pattern (repeat)
+      const pattern = [
+        0,0,0,  0.1,0.2,0.35,  0.6,1.0,0.35,  0.15,0.05,0,
+        0,0,  0.12,0.25,0.12,  0,0,0,0
+      ];
+      let idx = 0;
+
+      function draw(){
+        const w = c.getBoundingClientRect().width;
+        const h = c.getBoundingClientRect().height;
+
+        // Background grid subtle
+        ctx.clearRect(0,0,w,h);
+
+        const isDark = (document.documentElement.getAttribute("data-theme") || "dark") === "dark";
+        const grid = isDark ? "rgba(255,255,255,.06)" : "rgba(10,12,16,.08)";
+        const line = isDark ? "rgba(242,208,124,.92)" : "rgba(138,107,42,.95)";
+        const glow = isDark ? "rgba(242,208,124,.45)" : "rgba(214,178,94,.22)";
+
+        // grid
+        ctx.save();
+        ctx.strokeStyle = grid;
+        ctx.lineWidth = 1;
+        for(let x=0;x<w;x+=40){
+          ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+        }
+        for(let y=0;y<h;y+=28){
+          ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+        }
+        ctx.restore();
+
+        // waveform
+        const mid = h * 0.55;
+        const amp = h * 0.30;
+
+        // build scrolling line points
+        const speed = 2.2; // px/frame
+        t += speed;
+
+        ctx.save();
+        ctx.shadowColor = glow;
+        ctx.shadowBlur = 12;
+        ctx.strokeStyle = line;
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        let x0 = - (t % 40);
+        let x = x0;
+        let pIndex = idx;
+
+        // produce enough points across width
+        for(; x < w + 80; x += 20){
+          const v = pattern[pIndex % pattern.length];
+          const y = mid - (v * amp);
+          if(x === x0) ctx.moveTo(x,y);
+          else ctx.lineTo(x,y);
+          pIndex++;
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        // update idx occasionally to create "pulse"
+        if((t % 120) < speed){
+          idx += 1;
+        }
+
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    }
+
+    /* =========================================
+       Splash progress (2–3s)
+       ========================================= */
+    function runSplash(){
+      const splash = document.getElementById("splash");
+      const pbar = document.getElementById("pbar");
+      const pct = document.getElementById("pct");
+      const main = document.getElementById("main");
+
+      const start = performance.now();
+      const duration = Math.floor(SPLASH_MIN_MS + Math.random() * (SPLASH_MAX_MS - SPLASH_MIN_MS));
+
+      function step(now){
+        const elapsed = now - start;
+        const p = Math.min(1, elapsed / duration);
+        const val = Math.floor(p * 100);
+
+        pbar.style.width = val + "%";
+        pct.textContent = val + "%";
+
+        if(p < 1){
+          requestAnimationFrame(step);
+        } else {
+          // hide splash
+          splash.classList.add("hide");
+          // reveal main
+          setTimeout(()=>{
+            main.style.opacity = "1";
+            main.style.transform = "translateY(0)";
+          }, 120);
+          // remove splash from a11y tree after transition
+          setTimeout(()=>{
+            splash.style.display = "none";
+          }, 650);
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* =========================================
+       Notify demo
+       ========================================= */
+    function wireForm(){
+      const btn = document.getElementById("notifyBtn");
+      btn.addEventListener("click", ()=>{
+        const email = (document.getElementById("email").value || "").trim();
+        const note = document.getElementById("formNote");
+        const ok = email.includes("@") && email.includes(".");
+        if(!ok){
+          note.textContent = (lang === "th")
+            ? "ใส่อีเมลให้ถูกก่อนนะครับ (ตอนนี้เป็น UI ตัวอย่าง ยังไม่ส่งข้อมูลออกไป)"
+            : "Please enter a valid email (UI demo only — no submission yet).";
+          note.style.color = "rgba(251,113,133,.95)";
+          return;
+        }
+        note.textContent = (lang === "th")
+          ? "รับทราบ! (Demo) — ถ้าต้องการเก็บอีเมลจริง เดี๋ยวต่อระบบให้ได้"
+          : "Got it! (Demo) — we can wire a real email list later.";
+        note.style.color = "rgba(52,211,153,.95)";
+      });
+    }
+
+    /* =========================================
+       Boot
+       ========================================= */
+    (function init(){
+      // restore preferences
+      const savedTheme = localStorage.getItem("td_theme");
+      const savedLang = localStorage.getItem("td_lang");
+      if(savedTheme === "light" || savedTheme === "dark") setTheme(savedTheme);
+      else setTheme("dark");
+      if(savedLang === "en" || savedLang === "th") lang = savedLang;
+
+      // wire toggles
+      document.getElementById("themeBtn").addEventListener("click", toggleTheme);
+      document.getElementById("langBtn").addEventListener("click", toggleLang);
+      document.getElementById("splashThemeBtn").addEventListener("click", toggleTheme);
+      document.getElementById("splashLangBtn").addEventListener("click", toggleLang);
+
+      // apply language now
+      applyLang();
+
+      // footer year
+      document.getElementById("yy").textContent = new Date().getFullYear();
+
+      // start heartbeat canvases
+      startHeartbeat("hb");
+      startHeartbeat("hb2");
+
+      // run splash with progress (2–3 sec)
+      runSplash();
+
+      // form
+      wireForm();
+
+      // (optional) countdown computed — kept for future widgets
+      countdown();
+    })();
   </script>
 </body>
 </html>
